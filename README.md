@@ -17,20 +17,6 @@ The system allows users to manage equipment, perform checkout/checkin operations
 
 ---
 
-## Business Logic
-
-Each equipment item has a lifecycle:
-
-- AVAILABLE → can be checked out
-- CHECKED_OUT → must be checked in before reuse
-
-Rules enforced:
-- Cannot checkout already checked-out equipment
-- Cannot checkin already available equipment
-- All actions are logged in history table
-
----
-
 ## Tech Stack
 
 - Java 21
@@ -46,24 +32,21 @@ Rules enforced:
 
 ## Project Structure
 
+```
 src/main/java/com/testproject/taskmanager
-
 ├── controller
 │   └── EquipmentController.java
-
 ├── service
 │   └── EquipmentService.java
-
 ├── repository
 │   ├── EquipmentRepository.java
 │   └── RentalHistoryRepository.java
-
 ├── model
 │   ├── Equipment.java
 │   └── RentalHistory.java
-
-├── exception
-│   └── GlobalExceptionHandler.java
+└── exception
+    └── GlobalExceptionHandler.java
+```
 
 ---
 
@@ -71,35 +54,43 @@ src/main/java/com/testproject/taskmanager
 
 ### Clone the repository
 
-git clone <your-repo-url>
+```
+git clone https://github.com/zejoant/equipment-rental-management-system.git
 cd taskmanager
+```
 
 ### Run the application
-
+```
 mvn spring-boot:run
+```
 
 ### Open in browser
-
+```
 http://localhost:8080
+```
 
 ---
 
 ## API Endpoints
 
+```
 GET /equipment
 GET /equipment/{id}
 POST /equipment
 POST /equipment/{id}/checkout
 POST /equipment/{id}/checkin
+```
 
 ---
 
 ## Add New Equipment
 
+```
 {
   "name": "Camera",
   "description": "DSLR Camera"
 }
+```
 
 ---
 
@@ -129,13 +120,19 @@ Each record contains:
 ## Example CURL Requests
 
 Create equipment:
+```
 curl -X POST http://localhost:8080/equipment -H "Content-Type: application/json" -d '{"name":"Camera","description":"DSLR Camera"}'
+```
 
 Checkout equipment:
+```
 curl -X POST http://localhost:8080/equipment/1/checkout
+```
 
 Checkin equipment:
+```
 curl -X POST http://localhost:8080/equipment/1/checkin
+```
 
 ---
 
